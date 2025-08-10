@@ -1,5 +1,5 @@
 import React from "react";
-
+import NotFound from "../pages/NotFound";
 const Articles = ({ articleContent }) => {
   return (
     <>
@@ -17,7 +17,7 @@ const Articles = ({ articleContent }) => {
           ))}
         </div>
       ) : (
-        <p className="text-red-500">Article not found.</p>
+        <NotFound />
       )}
     </>
   );
