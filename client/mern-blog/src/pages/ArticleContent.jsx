@@ -10,7 +10,7 @@ const posts = [
     ],
   },
   {
-    name: "ali",
+    name: "haseeb",
     title: "Tailwind CSS Tips",
     thumbnail: "../../public/tailwind.jpg",
     content: [

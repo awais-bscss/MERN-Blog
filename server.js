@@ -39,7 +39,7 @@ app.post("/api/articles/:name/add-comments", (req, res) => {
       .collection("articles")
       .findOne({ name: articleName });
 
-    res.status(200).send(updatedArticleInfo);
+    res.status(200).json(updatedArticleInfo);
   }, res);
 });
 

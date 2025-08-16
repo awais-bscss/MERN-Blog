@@ -1,13 +1,30 @@
 import React from "react";
+import CommentsList from "../components/CommentsList";
 import Articles from "../components/Articles";
 import { Link, useParams } from "react-router-dom";
 import posts from "../pages/ArticleContent";
 import NotFound from "./NotFound";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Article = () => {
   const { name } = useParams();
   const articleContent = posts.find((post) => post.name === name);
-
+  const [articleInfo, setArticleInfo] = useState({ comments: [] });
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await fetch(`/api/articles/${name}`);
+      if (result.ok) {
+        const data = await result.json();
+        setArticleInfo(data);
+        console.log("Article data fetched successfully:", data);
+      } else {
+        console.error("Error fetching article data");
+      }
+    };
+    fetchData();
+    console.log("Fetching article info for:", name);
+  }, [name]);
   if (!articleContent) {
     return <NotFound />;
   }
@@ -19,11 +36,13 @@ const Article = () => {
       </h1>
 
       <Articles articleContent={articleContent} />
+      {/* <CommentsList comments={articleInfo.comments} /> */}
+      <CommentsList comments={articleInfo?.comments || []} />
 
-      <h1 className="sm:text-2xl text-xl font-bold -mt-20 mb-10 text-gray-900">
+      <h1 className="sm:text-2xl text-xl font-bold -mt-90 text-gray-900">
         Other Articles
       </h1>
-      <div className="flex flex-wrap -m-4">
+      <div className="flex flex-wrap -m-3">
         {posts
           .filter((post) => post.name !== name)
           .map((article) => (
