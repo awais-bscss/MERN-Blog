@@ -1,6 +1,7 @@
 import React from "react";
 import CommentsList from "../components/CommentsList";
 import Articles from "../components/Articles";
+import AddComment from "../components/AddComment";
 import { Link, useParams } from "react-router-dom";
 import posts from "../pages/ArticleContent";
 import NotFound from "./NotFound";
@@ -38,7 +39,7 @@ const Article = () => {
       <Articles articleContent={articleContent} />
       {/* <CommentsList comments={articleInfo.comments} /> */}
       <CommentsList comments={articleInfo?.comments || []} />
-
+      <AddComment articleName={name} setArticleInfo={setArticleInfo} />
       <h1 className="sm:text-2xl text-xl font-bold -mt-90 text-gray-900">
         Other Articles
       </h1>
